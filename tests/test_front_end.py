@@ -461,5 +461,127 @@ class TestDepartments(CreateObjects, TestBase):
         self.assertEqual(Department.query.count(), 0)
 
 
+class TestPermissions(CreateObjects, TestBase):
+
+    def test_permissions_admin_dashboard(self):
+        """
+        Test that non-admin users cannot access the admin dashboard
+        """
+        # Login as non-admin user
+        self.login_test_user()
+
+        # Navigate to admin dashboard
+        target_url = self.get_server_url() + url_for('home.admin_dashboard')
+        self.driver.get(target_url)
+
+        # Assert 403 error page is shown
+        error_title = self.driver.find_element_by_css_selector("h1").text
+        self.assertEqual("403 Error", error_title)
+        error_text = self.driver.find_element_by_css_selector("h3").text
+        assert "You do not have sufficient permissions" in error_text
+
+    def test_permissions_list_departments_page(self):
+        """
+        Test that non-admin users cannot access the list departments page
+        """
+        # Login as non-admin user
+        self.login_test_user()
+
+        # Navigate to admin dashboard
+        target_url = self.get_server_url() + url_for('admin.list_departments')
+        self.driver.get(target_url)
+
+        # Assert 403 error page is shown
+        error_title = self.driver.find_element_by_css_selector("h1").text
+        self.assertEqual("403 Error", error_title)
+        error_text = self.driver.find_element_by_css_selector("h3").text
+        assert "You do not have sufficient permissions" in error_text
+
+    def test_permissions_add_department_page(self):
+        """
+        Test that non-admin users cannot access the add department page
+        """
+        # Login as non-admin user
+        self.login_test_user()
+
+        # Navigate to admin dashboard
+        target_url = self.get_server_url() + url_for('admin.add_department')
+        self.driver.get(target_url)
+
+        # Assert 403 error page is shown
+        error_title = self.driver.find_element_by_css_selector("h1").text
+        self.assertEqual("403 Error", error_title)
+        error_text = self.driver.find_element_by_css_selector("h3").text
+        assert "You do not have sufficient permissions" in error_text
+
+    def test_permissions_list_roles_page(self):
+        """
+        Test that non-admin users cannot access the list roles page
+        """
+        # Login as non-admin user
+        self.login_test_user()
+
+        # Navigate to admin dashboard
+        target_url = self.get_server_url() + url_for('admin.list_roles')
+        self.driver.get(target_url)
+
+        # Assert 403 error page is shown
+        error_title = self.driver.find_element_by_css_selector("h1").text
+        self.assertEqual("403 Error", error_title)
+        error_text = self.driver.find_element_by_css_selector("h3").text
+        assert "You do not have sufficient permissions" in error_text
+
+    def test_permissions_add_role_page(self):
+        """
+        Test that non-admin users cannot access the add role page
+        """
+        # Login as non-admin user
+        self.login_test_user()
+
+        # Navigate to admin dashboard
+        target_url = self.get_server_url() + url_for('admin.add_role')
+        self.driver.get(target_url)
+
+        # Assert 403 error page is shown
+        error_title = self.driver.find_element_by_css_selector("h1").text
+        self.assertEqual("403 Error", error_title)
+        error_text = self.driver.find_element_by_css_selector("h3").text
+        assert "You do not have sufficient permissions" in error_text
+
+    def test_permissions_list_employees_page(self):
+        """
+        Test that non-admin users cannot access the list employees page
+        """
+        # Login as non-admin user
+        self.login_test_user()
+
+        # Navigate to admin dashboard
+        target_url = self.get_server_url() + url_for('admin.list_employees')
+        self.driver.get(target_url)
+
+        # Assert 403 error page is shown
+        error_title = self.driver.find_element_by_css_selector("h1").text
+        self.assertEqual("403 Error", error_title)
+        error_text = self.driver.find_element_by_css_selector("h3").text
+        assert "You do not have sufficient permissions" in error_text
+
+    def test_permissions_assign_employee_page(self):
+        """
+        Test that non-admin users cannot access the assign employee page
+        """
+        # Login as non-admin user
+        self.login_test_user()
+
+        # Navigate to admin dashboard
+        target_url = self.get_server_url() + url_for('admin.assign_employee', id=1)
+        self.driver.get(target_url)
+
+        # Assert 403 error page is shown
+        error_title = self.driver.find_element_by_css_selector("h1").text
+        self.assertEqual("403 Error", error_title)
+        error_text = self.driver.find_element_by_css_selector("h3").text
+        assert "You do not have sufficient permissions" in error_text
+
+
 if __name__ == '__main__':
     unittest.main()
