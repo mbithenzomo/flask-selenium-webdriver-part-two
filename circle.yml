@@ -1,6 +1,6 @@
 machine:
   python:
-    version: pypy-2.7.5
+    version: 2.7.10
 database:
   override:
     - mysql -u ubuntu circle_test < my-database-setup.sql
