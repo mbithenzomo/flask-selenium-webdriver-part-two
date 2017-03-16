@@ -15,11 +15,16 @@ login_manager = LoginManager()
 
 
 def create_app(config_name):
-    if os.getenv('FLASK_CONFIG') == "production" or os.getenv('CIRCLECI'):
+    if os.getenv('FLASK_CONFIG') == "production":
         app = Flask(__name__)
         app.config.update(
             SECRET_KEY=os.getenv('SECRET_KEY'),
             SQLALCHEMY_DATABASE_URI=os.getenv('SQLALCHEMY_DATABASE_URI')
+        )
+    elif os.getenv('CIRCLECI'):
+        app = Flask(__name__)
+        app.config.update(
+            SECRET_KEY=os.getenv('SECRET_KEY')
         )
     else:
         app = Flask(__name__, instance_relative_config=True)

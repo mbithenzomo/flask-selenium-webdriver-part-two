@@ -1,3 +1,4 @@
+import os
 import unittest
 
 from flask import abort, url_for
@@ -10,12 +11,15 @@ from app.models import Department, Employee, Role
 class TestBase(TestCase):
 
     def create_app(self):
-
-        # pass in test configurations
         config_name = 'testing'
         app = create_app(config_name)
+        if os.getenv('CIRCLECI'):
+            database_uri = os.getenv('SQLALCHEMY_DATABASE_URI')
+        else:
+            database_uri = 'mysql://dt_admin:dt2016@localhost/dreamteam_test',
         app.config.update(
-            SQLALCHEMY_DATABASE_URI='mysql://dt_admin:dt2016@localhost/dreamteam_test'
+            # Specify the test database
+            SQLALCHEMY_DATABASE_URI=database_uri
         )
         return app
 

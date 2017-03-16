@@ -3,7 +3,6 @@ machine:
     version: 2.7.10
 database:
   override:
-    - mysql -u ubuntu circle_test < my-database-setup.sql
-test:
+    - mysql -u ubuntu circle_test
   override:
     - nose2

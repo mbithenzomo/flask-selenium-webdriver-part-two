@@ -1,6 +1,8 @@
+import os
+import time
 import unittest
 import urllib2
-import time
+
 
 from flask import url_for
 from flask_testing import LiveServerTestCase
@@ -71,9 +73,13 @@ class TestBase(LiveServerTestCase):
     def create_app(self):
         config_name = 'testing'
         app = create_app(config_name)
+        if os.getenv('CIRCLECI'):
+            database_uri = os.getenv('SQLALCHEMY_DATABASE_URI')
+        else:
+            database_uri = 'mysql://dt_admin:dt2016@localhost/dreamteam_test',
         app.config.update(
             # Specify the test database
-            SQLALCHEMY_DATABASE_URI='mysql://dt_admin:dt2016@localhost/dreamteam_test',
+            SQLALCHEMY_DATABASE_URI=database_uri,
             # Change the port that the liveserver listens on
             LIVESERVER_PORT=8943
         )
