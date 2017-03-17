@@ -16,7 +16,7 @@ class TestBase(TestCase):
         if os.getenv('CIRCLECI'):
             database_uri = os.getenv('SQLALCHEMY_DATABASE_URI')
         else:
-            database_uri = 'mysql://dt_admin:dt2016@localhost/dreamteam_test',
+            database_uri = 'mysql://dt_admin:dt2016@localhost/dreamteam_test'
         app.config.update(
             # Specify the test database
             SQLALCHEMY_DATABASE_URI=database_uri
