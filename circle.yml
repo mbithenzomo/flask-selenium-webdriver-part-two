@@ -4,5 +4,8 @@ machine:
 database:
   override:
     - mysql -u ubuntu circle_test
+test:
   override:
     - nose2
+  post:
+    - coveralls
