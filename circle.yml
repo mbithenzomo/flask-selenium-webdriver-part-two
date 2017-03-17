@@ -1,9 +1,6 @@
 machine:
   python:
     version: 2.7.10
-database:
-  override:
-    - mysql -u ubuntu circle_test
 test:
   override:
     - nose2
