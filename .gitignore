@@ -2,3 +2,5 @@
 *.pyc
 instance/
 geckodriver.log
+post.md
+.coverage
