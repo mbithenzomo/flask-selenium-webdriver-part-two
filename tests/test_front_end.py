@@ -126,6 +126,9 @@ class TestBase(LiveServerTestCase):
         self.driver.quit()
 
     def test_server_is_up_and_running(self):
+        """
+        Test that server returns 200 status code
+        """
         response = urllib2.urlopen(self.get_server_url())
         self.assertEqual(response.code, 200)
 
