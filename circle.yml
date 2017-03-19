@@ -3,8 +3,6 @@ machine:
     version: 2.7.10
 test:
   override:
-    - nose2
+    - nose2 --with-coverage 
   post:
-    - coverage run app/*.py
-    - coverage report
     - coveralls
