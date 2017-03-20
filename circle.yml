@@ -3,6 +3,4 @@ machine:
     version: 2.7.10
 test:
   override:
-    - nose2 --with-coverage 
-  post:
-    - coveralls
+    - nose2
